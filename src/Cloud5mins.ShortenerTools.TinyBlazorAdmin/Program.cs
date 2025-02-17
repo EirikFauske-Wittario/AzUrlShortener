@@ -9,10 +9,14 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 var baseAddress = builder.HostEnvironment.BaseAddress;
 var functionsKey = Environment.GetEnvironmentVariable("FUNCTION_KEY");
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+var functionsKey2 = builder.Configuration["FUNCTION_KEY"];
+
 builder.Services
         .AddScoped(sp => {
             var client = new HttpClient { BaseAddress = new Uri(baseAddress) };
             client.DefaultRequestHeaders.Add("x-functions-key", functionsKey);
+            client.DefaultRequestHeaders.Add("x-functions-key-2", functionsKey2);
             return client;
         })
         .AddStaticWebAppsAuthentication();
