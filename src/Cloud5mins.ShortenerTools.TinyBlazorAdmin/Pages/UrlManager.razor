@@ -204,7 +204,10 @@ else
     {
         try
         {
-            using var response = await Http.GetAsync("/api/UrlList");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/UrlList");
+            request.Headers.Add("x-functions-key", Environment.GetEnvironmentVariable("FUNCTION_KEY"));
+
+            using var response = await Http.SendAsync(request);
             if(response.IsSuccessStatusCode){
                 urls = await response.Content.ReadFromJsonAsync<ListResponse>();    
             }
