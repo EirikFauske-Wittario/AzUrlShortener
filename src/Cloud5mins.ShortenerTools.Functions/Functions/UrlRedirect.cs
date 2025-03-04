@@ -3,7 +3,6 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Cloud5mins.ShortenerTools.Functions;
@@ -52,9 +51,8 @@ public class UrlRedirect
             _logger.LogInformation("Bad Link, resorting to fallback.");
         }
 
-        var res = req.CreateResponse(HttpStatusCode.OK);
-        await res.WriteStringAsync(redirectUrl);
-        //res.Headers.Add("Location", redirectUrl);
+        var res = req.CreateResponse(HttpStatusCode.Redirect);
+        res.Headers.Add("Location", redirectUrl);
         return res;
 
     }
