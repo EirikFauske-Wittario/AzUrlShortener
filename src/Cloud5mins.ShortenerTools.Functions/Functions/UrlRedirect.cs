@@ -50,20 +50,9 @@ public class UrlRedirect
             _logger.LogInformation("Bad Link, resorting to fallback.");
         }
 
-        var html = @$"<!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv=""refresh"" content=""0;url={redirectUrl}"">
-    </head>
-    <body>
-        <p>If you are not redirected, <a href=""{redirectUrl}"">click here</a>.</p>
-    </body>
-    </html>";
 
-        var res = req.CreateResponse(HttpStatusCode.OK);
-        res.Headers.Add("Content-Type", "text/html; charset=utf-8");
-        await res.WriteStringAsync(html);
-
+        var res = req.CreateResponse(HttpStatusCode.Redirect);
+        res.Headers.Add("Location", redirectUrl);
         return res;
     }
 }
