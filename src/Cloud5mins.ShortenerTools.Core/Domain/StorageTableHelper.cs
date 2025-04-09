@@ -19,6 +19,19 @@ namespace Cloud5mins.ShortenerTools.Core.Domain
             return storageAccount;
         }
 
+        public (bool IsHealthy, Exception? Exception) IsHealthy()
+        {
+            try
+            {
+                GetStatsTable();
+                return (true, null);
+            }
+            catch (Exception ex)
+            {
+                return (false, ex);
+            }
+        }
+
         private CloudTable GetTable(string tableName)
         {
             CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString();

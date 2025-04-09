@@ -23,14 +23,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Cloud5mins.ShortenerTools.Functions
 {
     public class UrlList
     {
-
         private readonly ILogger _logger;
         private readonly ShortenerSettings _settings;
 
