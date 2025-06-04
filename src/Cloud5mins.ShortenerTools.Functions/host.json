@@ -10,7 +10,8 @@
   },
   "extensions": {
     "http": {
-      "routePrefix": ""
+      "routePrefix": "",
+      "dynamicThrottlesEnabled": false
     }
   }
 }
